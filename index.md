@@ -8,6 +8,7 @@ tagline: Supporting tagline
 ## Goals/Objectives
 
 After finishing this lesson, you will be able to:
+
   - understand basic spatial functions
   - know how to use spatial functions to analyze a dataset
 
