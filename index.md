@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Spatial Analysis
-tagline: Supporting tagline
+tagline: 
 ---
 {% include JB/setup %}
 

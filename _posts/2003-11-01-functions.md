@@ -2,7 +2,7 @@
 title: "Spatial Analysis"
 layout: post
 category : Ask some questions
-tagline: "Supporting tagline"
+tagline: 
 tags : [spatial functions]
 ---
 
