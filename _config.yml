@@ -14,9 +14,9 @@ author :
   name : Nathan Casler & Daniel Guaderrama
   email : ncasler@email.arizona.edu
   github : spatialcarpentry
-  twitter : username
-  feedburner : feedname
-
+#  twitter : username
+#  feedburner : feedname
+repo_name : Spatial Analysis
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
