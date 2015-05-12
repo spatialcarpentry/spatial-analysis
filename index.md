@@ -7,10 +7,10 @@ tagline:
 
 ## Goals/Objectives
 
-After finishing this lesson, you will be able to:
+After completing this section, you will:
 
-  - understand basic spatial functions
-  - know how to use spatial functions to analyze a dataset
+- Understand basic spatial functions
+- Understand how to use spatial functions to analyze a dataset
 
 ## Topics
 
@@ -19,6 +19,8 @@ After finishing this lesson, you will be able to:
     <li><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ol>
+
+----
 
 ## More Resources
 
