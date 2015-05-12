@@ -5,7 +5,7 @@ tagline:
 ---
 {% include JB/setup %}
 
-## Goals/Objectives
+## Objectives
 
 After completing this section, you will:
 
