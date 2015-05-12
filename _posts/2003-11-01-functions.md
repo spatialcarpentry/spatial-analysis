@@ -1,5 +1,5 @@
 ---
-title: "Spatial Analysis"
+title: "Spatial Functions"
 layout: post
 category : Ask some questions
 tagline: 
@@ -8,15 +8,24 @@ tags : [spatial functions]
 
 {% include JB/setup %}
 
-####**Pre-requisites:** Intro to Spatial Data, Data Formatting
+#### Pre-requisites:
 
-####**Objectives:**
-  - Recognize a few spatial relationships
-  - Understand how to clip a raster  
+- Intro to Spatial Data
+- Data Formatting
+
+#### Objectives:
+
+- Recognize a few spatial relationships
+- Understand how to clip a raster  
+
+#### Data:
+
+iPlant Data Store: <br>&nbsp;&nbsp;&nbsp;``Community Data/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions/``
+
+- [data one](link-to-data-one)
+- [data two](link-to-data-two)
 
 ----
-
-# Spatial Functions
 
 ## Relational Operations
 

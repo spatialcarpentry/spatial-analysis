@@ -8,29 +8,34 @@ tags : [case study, landslide]
 
 {% include JB/setup %}
 
-# Landslide Susceptibility Model
 
-----
+#### Pre-requisites:
+
+1. one
+2. two
+3. three
 
 #### Objectives:
 
+- one
+- two
+- three
+
+#### Data:
+
+iPlant Data Store: <br>&nbsp;&nbsp;&nbsp;``Community Data/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise/``
+
+- USA_states.shp
+- DEM.tif
+- WA_geology.shp
 
 ----
+
+## Landslide Susceptibility Model
 
 ### Overview
 
 This case study has been chosen to demonstrate the concepts being highlighted by the bootcamp. We have chosen a landslide susceptibility analysis due to the diversity of inputs and a general curiousity into the methodology. The study area has been chosen in response to the Oso Mudslide[^1] which took place in Washington State on March 22nd, 2014. The methodology for this analysis is based off of work done by the California Geological Survey in Conjunction with the USGS[^2].
-
-----
-
-### Datasets
-
-
-Using the iRODS plugin, download the following layers:
-
-  - USA_states.shp
-  - DEM.tif
-  - WA_geology.shp
 
 ----
 
