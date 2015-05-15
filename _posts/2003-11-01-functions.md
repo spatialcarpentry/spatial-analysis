@@ -20,10 +20,12 @@ tags : [spatial functions]
 
 #### Data:
 
-iPlant Data Store: <br>&nbsp;&nbsp;&nbsp;``Community Data/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions/``
+Data for the following exercise was prepared in [Data Hygiene](http://spatialcarpentry.github.io/data-hygiene/clean%20your%20data/data-cleaning/), lesson 4.1. Data is also prepared and available below:
 
-- [data one](link-to-data-one)
-- [data two](link-to-data-two)
+iRods access: <br>&nbsp;&nbsp;&nbsp;``/home/$USERNAME/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions/``
+
+- [Washington state boundary (wa_state.shp)](link-to-data-one)
+- [US northwest GTOPO30 DEM (us_northwest_gt30w140n90.tif)](link-to-data-two)
 
 ----
 

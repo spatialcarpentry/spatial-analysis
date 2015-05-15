@@ -23,11 +23,12 @@ tags : [case study, landslide]
 
 #### Data:
 
+Data for the following exercises was prepared in [Spatial Functions](http://localhost:4000/ask%20some%20questions/functions), lesson 5.1. Data is also prepared and available below:
+
 iPlant Data Store: <br>&nbsp;&nbsp;&nbsp;``Community Data/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise/``
 
-- USA_states.shp
-- DEM.tif
-- WA_geology.shp
+- [Washington geology (wa_geology.shp)](link-here)
+- [Washington slope (wa_slope.tif)](link-here)
 
 ----
 
@@ -38,7 +39,7 @@ iPlant Data Store: <br>&nbsp;&nbsp;&nbsp;``Community Data/aegis/Spatial-bootcamp
 This case study has been chosen to demonstrate the concepts being highlighted by the bootcamp. We have chosen a landslide susceptibility analysis due to the diversity of inputs and a general curiousity into the methodology. The study area has been chosen in response to the Oso Mudslide[^1] which took place in Washington State on March 22nd, 2014. The methodology for this analysis is based off of work done by the California Geological Survey in Conjunction with the USGS[^2].
 
 ----
-
+<!--
 ### Data Wrangling
 
 <h4>Set project projection</h4>
@@ -158,7 +159,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 </ol>
   <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/hillshade-calc.png" alt="hillshade-calc" title="" />
 
-
+-->
 
 <h4>Load the Geology Layer</h4>
   <ol>
