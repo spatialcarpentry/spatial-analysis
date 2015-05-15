@@ -25,7 +25,7 @@ tags : [case study, landslide]
 
 Data for the following exercises was prepared in [Spatial Functions](http://localhost:4000/ask%20some%20questions/functions), lesson 5.1. Data is also prepared and available below:
 
-iRods access: <br>&nbsp;&nbsp;&nbsp;``/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise/``
+iRods access: <br>&nbsp;&nbsp;&nbsp;``/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise``
 
 - [Washington geology (wa_geology.shp)](link-here)
 - [Washington slope (wa_slope.tif)](link-here)
