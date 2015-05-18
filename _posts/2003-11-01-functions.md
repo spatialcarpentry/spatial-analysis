@@ -20,12 +20,14 @@ tags : [spatial functions]
 
 #### Data:
 
-Data for the following exercise was prepared in [Data Hygiene](http://spatialcarpentry.github.io/data-hygiene/clean%20your%20data/data-cleaning/), lesson 4.1. Data is also prepared and available below:
-
 iRods access: <br>&nbsp;&nbsp;&nbsp;``/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions``
 
-- [Washington state boundary (wa_state.shp)](link-to-data-one)
-- [US northwest GTOPO30 DEM (us_northwest_gt30w140n90.tif)](link-to-data-two)
+<br>
+
+Download files:
+
+- [Washington state boundary (washington.shp)](http://de.iplantcollaborative.org/dl/d/761205F0-7921-4E0A-8209-94FC79357569/washington.zip)
+- [US northwest GTOPO30 DEM (dem_2927.tif)](http://de.iplantcollaborative.org/dl/d/8859A56F-A310-447F-A200-A4EB4AED2DF8/dem_2927.tif)
 
 ----
 
@@ -236,45 +238,82 @@ Symmetric Difference
 
 ## Exercise
 
-The following exercises are a continuation of the previous exercises. Open your project workspace before starting the following steps. See [Data Wrangling]({{BASE_PATH}}/data%20wrangling/data-wrangling).
+<ol>
+<li>Import Washington boundary and dem_2927:<br>
+<ol>
+<li>iRods access: <br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions</code>
+<br><br>
+Or download here:<br>&nbsp;&nbsp;&nbsp;<a href="link-here">washington.zip</a><br>&nbsp;&nbsp;&nbsp;<a href="link-here">dem_2927.tif</a><br><br>You should now be viewing the boundary of Washington and a DEM of the US northwest:<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-1.png" alt="Spatial Data Bootcamp: Washington and DEM" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-1.png"/><br><br>
+</li>
+</ol>
+<li>Confirm both are in the same projection, EPSG:2927:<br><br>Notice how the two layers are aligned once they're imported.<br><br>Since we have not set our project projection ('on-the-fly' transformation is off) and the project projection has been defaulted to EPSG:2927 (see lower right corner of QGIS), that must mean both layers are stored with EPSG:2927.<br><br>Although, it's <em>always</em> recommended that you check projections of all layers.<br><br><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-2.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-2.png" alt="Spatial Data Bootcamp: Check projections"/><br><br>
+<li>Clip DEM to Washington boundary:<br>
+<ol>
+<li>Open the raster <strong>Clipper</strong> tool: <em>Menu Bar > Raster > Extraction > Clipper</em><br><br>Configure inputs as follows:<br>
+<ul>
+<li>Input file: <strong>dem_2927</strong></li>
+<li>Output file: <strong>wa_dem.tif</strong></li>
+<li>No data value: <strong>0</strong></li>
+<li>Clipping mode: <strong>Mask Layer</strong> > <strong>washington</strong></li>
+</ul>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-3.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-3.png" alt="Spatial Data Bootcamp"/>
+</li>
+<li>Remove washington.shp and dem_2927.tif and zoom into wa_dem.tif:<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-4.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-4.png" alt="Spatial Data Bootcamp"/>
+</li>
+</ol>
 
-8. Clip the dem to the state boundary
-  * In the top menu, select Raster > Extraction > Clipper
-  * In the window, set the following options:
-    + **Input file: dem-project.tif**
-    + **Output file: dem-washington.tif**
-    + **No data value: 0**
-    + **Clipping Mode: Mask layer > washington**
-    + Load into canvas when finished<br>
-  <img alt="demWashington" src="{{BASE_PATH}}{{ASSET_PATH}}/images/dem-washington.png" class="screen-shot" />
-9. Remove the dem-project.tif layer<br>
-  <img alt="dem-washington-display" src="{{BASE_PATH}}{{ASSET_PATH}}/images/dem-washington-display.png" class="screen-shot" /><br>
-10. Create a slope surface <br>
-  In the top menu, select **Raster > Analysis > DEM** <br>
-  * Input file: dem-washington
-  * Output file: slope-washington.tif
-  * Mode: Slope
-  * Scale: 0.30
-  * Load into canvas when finished<br>
-  <img alt="create-slope" src="{{BASE_PATH}}{{ASSET_PATH}}/images/create-slope.png" class="screen-shot" /><br>
-11. Create a hillshade layer<br>
-  In the top menu, select **Raster > Analysis > DEM** <br>
-  * Input file: dem-washington
-  * Output file: hillshade-washington.tif
-  * Mode: Hillshade
-  * Z factor: 1.0
-  * Scale: 0.30
-  * Azimuth of light: 315.0
-  * Altitude of light: 45.0
-  * Load into canvas when finished<br>
-  <img alt="hillshade-calc" src="{{BASE_PATH}}{{ASSET_PATH}}/images/hillshade-calc.png" class="screen-shot" /><br>
-12. Save your project workspace.
+</li>
+<li>Create slope surface from wa_dem:<br>
+<ol>
+<li>
+Open the raster <strong>DEM (Terrain models)</strong> tool: <em>Menu Bar > Raster > Analysis > DEM (Terrain models)</em><br><br>
+Configure inputs as follows:<br>
+<ul>
+<li>Input file: <strong>wa_dem</strong></li>
+<li>Output file: <strong>wa_slope.tif</strong></li>
+<li>Band: <strong>1</strong></li>
+<li>Mode: <strong>Slope</strong></li>
+<li>Scale: <strong>0.30</strong></li>
+<li>Load into canvas when finished: (checked)</li>
+</ul>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-5.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-5.png" alt="Spatial Data Bootcamp"/>
+</li>
+<li>Your slope layer should look like the one below:<br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-6.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-6.png" alt="Spatial Data Bootcamp"/>
+</ol>
+</li>
+<li>Create hillshade from wa_dem:<br>
+<ol>
+<li>
+<ul>
+<li>Open the <strong>DEM (Terrain models)</strong> tool and configure inputs as follows:<br>
+<ul>
+<li>Input file: <strong>wa_dem</strong></li>
+<li>Output file: <strong>wa_hillshade.tif</strong></li>
+<li>Band: <strong>1</strong></li>
+<li>Mode: <strong>Hillshade</strong></li>
+<li>Z factor: <strong>1.00</strong></li>
+<li>Scale: <strong>0.30</strong></li>
+<li>Azimuth of the light: <strong>315.0</strong></li>
+<li>Altitude of the light: <strong>45.0</strong></li>
+<li>Load into canvas when finished: (checked)</li>
+</ul>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-7.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-7.png" alt="Spatial Data Bootcamp"/>
+</li>
+<li>Your hillshade layer should look like the one below:<br>
+</li>
+</ol>
+</li>
+</ul>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-8.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-8.png" alt="Spatial Data Bootcamp"/>
+</li>
+</ol>
 
-<br>
+<p>You have just successfully clipped a raster to a vector, created a slope raster, and created a hillshade raster.</p>
 
-----
-
-<br>
+<hr>
 
 [^1]: SQL Simple Features Specification
 [^2]: JTS
