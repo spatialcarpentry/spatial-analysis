@@ -166,15 +166,17 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 
 -->
 
-<h4>Load the Geology Layer</h4>
+   
+<h4>1. Load the Geology Layer</h4>
   <ol>
-    <li>Open QGIS and load wa_geology.shp through the iRods plugin:<br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise</code></li>
-    <li>Or download, unpack, and <strong>Add Vector Layer</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/add-vector.png"/><br><br></li>
-    <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-01.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
+    <li>Open QGIS and first set the project projection to ESPG:2927. This will ensure we have the correct projection after importing layers.</li>
+    <li>Load wa_geology.shp through the iRods plugin:<br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise</code></li>
+    <li>Or download, unpack, and <strong>Add Vector Layer</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/add-vector.png"/>:<br><a href="http://de.iplantcollaborative.org/dl/d/3B859CEE-D017-4F8F-A803-2D1C87F8D45C/wa_geology.zip">wa_geology.zip</a><br><br></li>
+    <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
     </li>
   </ol>
-<h4>Add Rock strength index</h4>
-<p>We are going to create a numeric field to represent the strength of the geologic unit</p>
+<h4>2. Add Rock strength index</h4>
+<p>We are going to add a new field to the wa_geology shapefile to represent the strength of the geologic unit. This new field data type will be number, not a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a>. This will allow us to perform arithmetic opertions later on.<br><br><strong>Think about it</strong>: the value '1' represented as a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a> does not equal the numeric value of 1.<br><br></p>
 <ol>
   <li>Open field calculator in Attribute Table:
     <ul>
@@ -185,7 +187,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
     </ul></li>
   <li>Add and calculate new field<br>
     Match your Field Calculator window to the one below for creating a new field <b>strength</b> with a range of values of 0-3. Be sure to match it exactly as it's displayed
-    <br>Note: <em>double-quotes are evaluated as a column whereas single-quotes are evaluated as column values. Save your changes once finished</em>.<br><br>
+    <br><br>Note: <em>double-quotes are evaluated as a column whereas single-quotes are evaluated as column values. Save your changes once finished</em>.<br><br>
     <strong>Expression:</strong> <br>
     <code>
       
@@ -198,7 +200,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
      </code><br><br>
     <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-04.png" alt="QGIS: Add and calculate new field" title="" /></li>
 </ol>
-<h4>Visualize the geology by strength</h4>
+<h4>3. Visualize the geology by strength</h4>
 <ol>
   <li>Right-click on wa_geology.shp in <b>Layer List > Properties > Style</b></li>
   <li>Change style type from <em>Single Symbol</em> to <em>Categorized</em>.</li>
@@ -206,7 +208,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
   <li>Match your colors with the example below or get fancy with your own styling.<br>
     <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-07.png" alt="QGIS: Style shapefile" title="" /></li>
 </ol>
-<h4>Rasterize the rock strength layer</h4>
+<h4>4. Rasterize the rock strength layer</h4>
   <p>GDAL's rasterize is a prefered method. This can be accessed through <em>Menu Bar > Raster > Conversion > Rasterize (Vector to raster)</em>. Notice how the parameters have been diabled in the example below. There's a specific reason for this. Complete the parameter inputs: <em>Define your output file and location (in working directory); Attribute field = strength; Raster size in pixels = 1000 x 1000</em>. Because GDAL is more powerful in the commandline, there are certain parameters that cannot be set within QGIS.</p>
 <ol>
   <li>Click the edit icon (pencil) locate near the block of code</em>. This enables you to add custom parameters.</li>
