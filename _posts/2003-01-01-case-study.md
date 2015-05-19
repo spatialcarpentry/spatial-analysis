@@ -175,42 +175,73 @@ This case study has been chosen to demonstrate the concepts being highlighted by
     <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
     </li>
   </ol>
-<h4>2. Add Rock strength index</h4>
-<p>We are going to add a new field to the wa_geology shapefile to represent the strength of the geologic unit. This new field data type will be number, not a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a>. This will allow us to perform arithmetic opertions later on.<br><br><strong>Think about it</strong>: the value '1' represented as a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a> does not equal the numeric value of 1.<br><br></p>
+<h4>2. Inspect Washington Geology Atrributes</h4>
+<p>If you open the Washington geology attributes you'll notice there's a column 'rock_type' with values as <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a>. Our landslide susceptibility model requires that we have a numeric value representing 'rock_type'. Notice the range of 'rock_type': soft, medium, hard. Wow that's an easy one! It's easy as 1, 2, 3 (literally). You're welcome for the heavy lifting. See 'geo_unit' for actual geologic unit types.</p>
+<p>We are going to add a new field to the wa_geology shapefile to represent the strength of the geologic unit. This new field data type will be <em>number</em>, not a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a>. This will allow us to perform arithmetic opertions later on.<br><br><strong>Think about it</strong>: the value '1' represented as a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a> does not equal the numeric value of 1. In this case, an <a href="http://en.wikipedia.org/wiki/Integer_%28computer_science%29">integer</a>.<br><br></p>
+<p><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-3.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-3.png" alt="Spatial Data Bootcamp: QGIS check geology"/></p>
+<h4>3. Add Rock strength index</h4>
 <ol>
-  <li>Open field calculator in Attribute Table:
-    <ul>
-      <li>Right-click <b>wa_geology</b> in <em>Layers List > Open Attribute Table > Toggle editing mode (top left)</em></li>
-      <li>While in edit mode,click <b>Open field calculator (top right)</b><br>
-        <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-03.png" alt="QGIS: Open field calcultor" class="screen-shot" />
+  <li>Open field calculator in Attribute Table and enter Edit Mode:<br><br>
+  <strong>Reminder:</strong> Making changes to your data in <strong>Edit Mode</strong> are <em>permanent</em>. It's good practice to store <em>source</em> data, or the original files in a separate directory so in the event you make a catastrophic mistake you don't have to ask your colleague, boss, or whomever for another copy of the data.<br><br>
+    <ol>
+      <li><em>Right-click <b>wa_geology</b> (Layers List) > Open Attribute Table > Toggle editing mode (top left)</em> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/toggle-edit.png"/></li>
+      <li>While in edit mode,click <b>Open field calculator (top right)</b> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/field-calculator.png"/><br><br>
+      Whil in <strong>Edit Mode</strong>  the Attribute table icons will be enabled: Save, Delete, New Column.<br><br>
+      Notice the shapefile has turned red on the map canvas. You can also edit the shapefile <em>nodes</em> (e.g. coordinates = point = node), changing the <em>geometry</em> of the file, since all we are really dealing with are <em>numbers</em>. We are simply <em>visualizing</em> these numbers (lat/long) and their geometry.<br><br>
+        <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-2.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-2.png" alt="QGIS: Open field calcultor" class="screen-shot" />
       </li>
-    </ul></li>
-  <li>Add and calculate new field<br>
-    Match your Field Calculator window to the one below for creating a new field <b>strength</b> with a range of values of 0-3. Be sure to match it exactly as it's displayed
+    </ol></li>
+  <li>Add and calculate new field:<br>
+    Match your Field Calculator window to the one below for creating a new field <b>strength</b> with a range of values of 0-3; if rock_type is not soft, medium, or hard then assign 0 to the value. Be sure to match it exactly as it's displayed
     <br><br>Note: <em>double-quotes are evaluated as a column whereas single-quotes are evaluated as column values. Save your changes once finished</em>.<br><br>
+    Configure <strong>Field Calculator</strong> inputs as follows:<br>
+    Create a new field: (checked)<br>
+    Output field name: <strong>strength</strong><br>
+    Output field type: <strong>Whole number</strong> (integer)<br>
+    Output field width: <strong>1</strong> (we only need single-digit integers)<br>
     <strong>Expression:</strong> <br>
-    <code>
+    <p style="padding-left: 30px;">
+    Copy and paste will work for entering the code into the <strong>Expression</strong> field.<br><br>
+       <code>
       
       case<br>
       &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'soft' then 1<br>
       &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'medium' then 2<br>
       &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'hard' then 3<br>
       else 0<br>
-      done
+      end
      </code><br><br>
-    <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-04.png" alt="QGIS: Add and calculate new field" title="" /></li>
+     </p>
+     This field calculation will take a couple of seconds. We're evaluating 57,657 rows.<br><br>
+    <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-4.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-4.png" alt="QGIS: Add and calculate new field" title="" /></li>
+  <li>Confirm field calculation of 'strength':<br><br>
+  Be sure to <strong>Save Edits</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/save-edits.png"/> then <strong>Disable Editing</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/toggle-edit.png"/> before continuing. Your geology layer will no longer be red (Edit Mode).<br><br><img data-ffeatherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-5.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-5.png" alt="Spatial Data Bootcamp: QGIS - check calculation"/>
+  </li>
 </ol>
-<h4>3. Visualize the geology by strength</h4>
+<h4>4. Visualize the geology by strength</h4>
+<p>Let's visualize the new field we have just calculated.</p>
 <ol>
-  <li>Right-click on wa_geology.shp in <b>Layer List > Properties > Style</b></li>
-  <li>Change style type from <em>Single Symbol</em> to <em>Categorized</em>.</li>
+  <li>Open <strong>wa_geology</strong> Style properties: <em>Right-click wa_geology (Layer list) > Properties > Style</em></li>
+  <li>Change style type from <strong>Single Symbol</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/single-symbol.png"/> to <br><strong>Categorized</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/categorized.png"/>.</li>
   <li>Categorize by <em>strength</em> and click <em>Classify</em> to add classes.</li>
   <li>Match your colors with the example below or get fancy with your own styling.<br>
-    <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-07.png" alt="QGIS: Style shapefile" title="" /></li>
+  <br>There's a category with no Value. You can leave this one there or highlight and delete it.<br><br>
+  Be sure to <strong>APPLY</strong> to make changes then <strong>OK</strong> to close the Properties window<br><br>
+    <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-6.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-6.png" alt="QGIS: Style shapefile" title="" /><br><br>Drum roll...<br><br>Reminder: Red = soft geology (land) = higher risk of landslides<br><br><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-7.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-7.png" alt="Spatial Data Bootcamp: QGIS visualize strenght"/></li>
 </ol>
-<h4>4. Rasterize the rock strength layer</h4>
-  <p>GDAL's rasterize is a prefered method. This can be accessed through <em>Menu Bar > Raster > Conversion > Rasterize (Vector to raster)</em>. Notice how the parameters have been diabled in the example below. There's a specific reason for this. Complete the parameter inputs: <em>Define your output file and location (in working directory); Attribute field = strength; Raster size in pixels = 1000 x 1000</em>. Because GDAL is more powerful in the commandline, there are certain parameters that cannot be set within QGIS.</p>
+<h4>5. Rasterize the rock strength layer</h4>
+<p>To be able to perform the landslide susceptibility model we must intersect rock strength with slope (derrived from a DEM). So the best (highly suggested) method is converting our geology shapefile into a raster. A simple process thanks to <a href="http://www.gdal.org/gdal_rasterize.html" target="_blank">GDAL_rasterize</a>.</p>
+  <p><a href="http://www.gdal.org/gdal_rasterize.html" target="_blank">GDAL_rasterize</a> can be accessed through <em>Menu Bar > Raster > Conversion > Rasterize (Vector to raster)</em>. Notice how the parameters have been diabled in the example below. There's a specific reason for this. Complete the parameter inputs: <em>Define your output file and location (in working directory); Attribute field = strength; Raster size in pixels = 1000 x 1000</em>. Because GDAL is more powerful in the commandline, there are certain parameters that cannot be set within QGIS.</p>
 <ol>
+<li>Open <strong>gdal_rasterize</strong>: <em>Menu Bar > Raster > Conversion > Rasterize (Vector to raster)</em></li>
+<li>Configure inputs as follows:<br>
+Input file: <strong>wa_geology</strong><br>
+Attribute filed: <strong>strength</strong><br>
+Output file for rasterized vectors (raster): <strong>wa_geo_coded</strong><br>
+<span style="padding-left:20px;"><em>"The output file doesn't exist. You must set up the output size or resolution to create it:"</em> <strong>OK</strong></span><br>
+Raster size in pixels: <strong>1000</strong><br>
+Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> icon <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-edit.png"/> near the block of code. This allows to add custom parameters.<br><br><img date-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-1.png" alt="Spatial Data Bootcamp: Gdal edit"/>
+</li>
   <li>Click the edit icon (pencil) locate near the block of code</em>. This enables you to add custom parameters.</li>
   <li>Add the line of code 
     <code>-at -a_nodata 0</code> just after <code>gdal_rasterize</code><br>
@@ -218,7 +249,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
   <li><code>-a_nodata 0 </code> The above snippet specifies that 0 should be recognized as a missing or null value, which prevents pixels with 0 value from being visualized or used in analysis in the output raster.[^3]</li>
   <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-11-2.png" class="screen-shot" /></li>
 </ol>
-<h4>Style the new Rock Strength Raster</h4>
+<h4>6. Style the new Rock Strength Raster</h4>
 <ol>
   <li>Open WA_geology.tif style properties. HINT: See step 4.</li>
   <li>For <b>Render type</b>, select <b>Singleband pseudocolor</b></li>
@@ -236,7 +267,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 
 <hr />
 
-<h3>Data Analysis</h3>
+<h3>7. Data Analysis</h3>
 
 <p>Reclassifying inputs:</p>
 
