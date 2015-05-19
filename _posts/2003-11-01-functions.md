@@ -33,7 +33,7 @@ Download files:
 
 ## Relational Operations
 
-Relational operators are a set of methods used to test for the existence of a specified toplogical spatial relationship between two geometric objects as they would be represented on a map. The basic approach to comparing towo geometric objects is to project the objects onto the 2D horizonal coordinate reference system representing the Earth's surface, and then make pair-wise test of the intersections between the interiors, boundaries and exteriors of the twp projections and to classify the map relationship between the two geometric objects based on the entries in the resulting 3 by 3 intersection matrix.[^1] 
+Relational operators are a set of methods used to test for the existence of a specified toplogical spatial relationship between two geometric objects as they would be represented on a map. The basic approach to comparing two geometric objects is to project the objects onto the 2D horizontal coordinate reference system representing the Earth's surface, and then make pair-wise test of the intersections between the interiors, boundaries and exteriors of the twp projections and to classify the map relationship between the two geometric objects based on the entries in the resulting 3 by 3 intersection matrix.[^1] 
 
 
 <table border="0" align="center">
@@ -142,7 +142,8 @@ Relational operators are a set of methods used to test for the existence of a sp
 ----
 
 ### Spatial Predicates
-The above figure demonstrates the criteria outlined by the Dimensionally Extended Nine-Intersection Model(DE-9IM). The matrix is used to outline specific spatial relationships or predicates which are more accessible to interpretaion. These named spatial predicates are also used by spatial queryies to selet subsets of geometrys that fit in one spatial predicate. 
+
+The above figure demonstrates the criteria outlined by the Dimensionally Extended Nine-Intersection Model(DE-9IM). The matrix is used to outline specific spatial relationships or predicates which are more accessible to interpretaion. These named spatial predicates are also used by spatial queries to selet subsets of geometrys that fit in one spatial predicate. 
 
 Here is a quick outline of the Spatial Predicates
 

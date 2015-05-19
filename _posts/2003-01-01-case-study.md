@@ -11,9 +11,9 @@ tags : [case study, landslide]
 
 #### Pre-requisites:
 
-1. one
-2. two
-3. three
+1. Setup
+2. Basics
+3. Data Hygiene
 
 #### Objectives:
 
@@ -21,6 +21,10 @@ tags : [case study, landslide]
 - two
 - three
 
+#### Exercise: Landslide Susceptibility Model
+
+
+<!--
 #### Data:
 
 Data for the following exercises was prepared in [Spatial Functions](http://localhost:4000/ask%20some%20questions/functions), lesson 5.1. Data is also prepared and available below:
@@ -29,6 +33,7 @@ iRods access: <br>&nbsp;&nbsp;&nbsp;``/iplant/home/shared/aegis/Spatial-bootcamp
 
 - [Washington geology (wa_geology.shp)](link-here)
 - [Washington slope (wa_slope.tif)](link-here)
+-->
 
 ----
 
@@ -163,9 +168,9 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 
 <h4>Load the Geology Layer</h4>
   <ol>
-    <li>Open the iRods plugin</li>
-    <li>Load the WA_geology.shp file<br>
-      <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-01.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
+    <li>Open QGIS and load wa_geology.shp through the iRods plugin:<br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise</code></li>
+    <li>Or download, unpack, and <strong>Add Vector Layer</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/add-vector.png"/><br><br></li>
+    <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-01.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
     </li>
   </ol>
 <h4>Add Rock strength index</h4>
@@ -173,15 +178,15 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 <ol>
   <li>Open field calculator in Attribute Table:
     <ul>
-      <li>Right-click <b>WA_geology</b> in <em>Layers List > Open Attribute Table > Toggle editing mode (top left)</em></li>
+      <li>Right-click <b>wa_geology</b> in <em>Layers List > Open Attribute Table > Toggle editing mode (top left)</em></li>
       <li>While in edit mode,click <b>Open field calculator (top right)</b><br>
         <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-03.png" alt="QGIS: Open field calcultor" class="screen-shot" />
       </li>
     </ul></li>
   <li>Add and calculate new field<br>
     Match your Field Calculator window to the one below for creating a new field <b>strength</b> with a range of values of 0-3. Be sure to match it exactly as it's displayed
-    <br>Note: <em>double-quotes are evaluated as a column whereas single-quotes are evaluated as column values. Save your changes once finished</em>.<br>
-    Expression: <br>
+    <br>Note: <em>double-quotes are evaluated as a column whereas single-quotes are evaluated as column values. Save your changes once finished</em>.<br><br>
+    <strong>Expression:</strong> <br>
     <code>
       
       case<br>
@@ -190,12 +195,12 @@ This case study has been chosen to demonstrate the concepts being highlighted by
       &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'hard' then 3<br>
       else 0<br>
       done
-     </code><br>
+     </code><br><br>
     <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-04.png" alt="QGIS: Add and calculate new field" title="" /></li>
 </ol>
 <h4>Visualize the geology by strength</h4>
 <ol>
-  <li>Right-click on WA_geology.shp in <b>Layer List > Properties > Style</b></li>
+  <li>Right-click on wa_geology.shp in <b>Layer List > Properties > Style</b></li>
   <li>Change style type from <em>Single Symbol</em> to <em>Categorized</em>.</li>
   <li>Categorize by <em>strength</em> and click <em>Classify</em> to add classes.</li>
   <li>Match your colors with the example below or get fancy with your own styling.<br>
