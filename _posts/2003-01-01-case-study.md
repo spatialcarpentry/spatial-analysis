@@ -17,9 +17,9 @@ tags : [case study, landslide]
 
 #### Objectives:
 
-- one
-- two
-- three
+- Prep data for a spatial analysis
+- Perform a spatial analysis utilizing both vector and raster data
+- Visualize results from the spatial analysis
 
 #### Exercise: Landslide Susceptibility Model
 
@@ -205,9 +205,9 @@ This case study has been chosen to demonstrate the concepts being highlighted by
        <code>
       
       case<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'soft' then 1<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'soft' then 3<br>
       &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'medium' then 2<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'hard' then 3<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;when "rock_type" = 'hard' then 1<br>
       else 0<br>
       end
      </code><br><br>
@@ -231,12 +231,12 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 </ol>
 <h4>5. Rasterize the rock strength layer</h4>
 <p>To be able to perform the landslide susceptibility model we must intersect rock strength with slope (derrived from a DEM). So the best (highly suggested) method is converting our geology shapefile into a raster. A simple process thanks to <a href="http://www.gdal.org/gdal_rasterize.html" target="_blank">GDAL_rasterize</a>.</p>
-  <p><a href="http://www.gdal.org/gdal_rasterize.html" target="_blank">GDAL_rasterize</a> can be accessed through <em>Menu Bar > Raster > Conversion > Rasterize (Vector to raster)</em>. Notice how the parameters have been diabled in the example below. There's a specific reason for this. Complete the parameter inputs: <em>Define your output file and location (in working directory); Attribute field = strength; Raster size in pixels = 1000 x 1000</em>. Because GDAL is more powerful in the commandline, there are certain parameters that cannot be set within QGIS.</p>
+  <p>Because GDAL is more powerful in the commandline, there are certain parameters that cannot be set within QGIS.</p>
 <ol>
 <li>Open <strong>gdal_rasterize</strong>: <em>Menu Bar > Raster > Conversion > Rasterize (Vector to raster)</em></li>
 <li>Configure inputs as follows:<br>
 Input file: <strong>wa_geology</strong><br>
-Attribute filed: <strong>strength</strong><br>
+Attribute filed: <strong>strength</strong> (strength value assigned to pixels)<br>
 Output file for rasterized vectors (raster): <strong>wa_geo_coded</strong><br>
 <span style="padding-left:20px;"><em>"The output file doesn't exist. You must set up the output size or resolution to create it:"</em> <strong>OK</strong></span><br>
 Raster size in pixels: <strong>3280 x 3280</strong> (1km resolution)<br>
@@ -286,7 +286,7 @@ iRods access: &nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp
 <p>The r.reclass tool reads text files which define the classification rules (rule files). We must prepare a text file with the following contents using a <strong>text editor</strong> not Microsoft Word</p>
 
 <b><em>Create slope-rule.txt:</em></b>
-
+<p>Copy and paste the code below into a new file and save it as <b>slope-rule.txt</b></p>
 <p><code>
 0 thru 2.99 = 1<br>
 3 thru 4.99 = 2<br>
@@ -402,7 +402,7 @@ Open the <b>Raster Calculator</b>: <em>Menu Bar > Raster > Raster Calculator</em
 <p>Our raster calculator expression will be: </p>
 
 <p><code>
-("geo_coded@1" * 10) + "slope-reclass@1"
+("wa_geo_coded@1" * 10) + "wa_slope_reclass@1"
 </code></p>
 
 <p>Output layer: <b>slope_geo_sect.tif</b></p>
@@ -455,9 +455,23 @@ Output raster layer: <b>wa_landslide_suscept.tif</b>
 </li>
 <li>
 <p>Our final product of landslide susceptibility within the entire state of Washington.</p>
+<p>Style <b>wa_landslide_suscept</b>:<br><br>
+Download style rules here: <a href="http://de.iplantcollaborative.org/dl/d/DB7A3C67-24F6-4E78-A332-5342BD87B5F2/wa_landslide_suscept.txt">wa_landslide_suscept.txt</a>
+</p>
+<p>Open <b>wa_landslide_suscept</b> (layer not text file) style properties and import the <b>wa_landslide_suscept.txt style rules:<br>
+<ol>
+<li>Switch the Render Type to <b>Singleband pseudocolor</b></li>
+<li>Import the <b>wa_landslide_suscept.txt</b> style rule file <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/open-style.png"/><br><br>
+Your categories should look like the same as below:<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-19.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-19.png" alt="Spatial Data Bootcamp"/>
+
+</p>
+<p>The final map:<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-20.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-20.png" alt="Spatial Data Bootcamp"/>
+</p>
 </li>
 </ol>
-
+<p>We have just located areas susceptible to landslides within the state of Washginton!</p>
 <hr>
 <br>
 References:
