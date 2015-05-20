@@ -170,7 +170,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
 <h4>1. Load the Geology Layer</h4>
   <ol>
     <li>Open QGIS and first set the project projection to ESPG:2927. This will ensure we have the correct projection after importing layers.</li>
-    <li>Load wa_geology.shp through the iRods plugin:<br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise</code></li>
+    <li>Load wa_geology.shp through the iRods plugin:<br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise/wa_geology.shp</code></li>
     <li>Or download, unpack, and <strong>Add Vector Layer</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/add-vector.png"/>:<br><a href="http://de.iplantcollaborative.org/dl/d/3B859CEE-D017-4F8F-A803-2D1C87F8D45C/wa_geology.zip">wa_geology.zip</a><br><br></li>
     <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
     </li>
@@ -192,7 +192,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
       </li>
     </ol></li>
   <li>Add and calculate new field:<br>
-    Match your Field Calculator window to the one below for creating a new field <b>strength</b> with a range of values of 0-3; if rock_type is not soft, medium, or hard then assign 0 to the value. Be sure to match it exactly as it's displayed
+    Be sure to match your Field Calculator window to the one below for creating a new field <b>strength</b> with a range of values of 0-3; if rock_type is not soft, medium, or hard then assign 0 to the value. Be sure to match it exactly as it's displayed
     <br><br>Note: <em>double-quotes are evaluated as a column whereas single-quotes are evaluated as column values. Save your changes once finished</em>.<br><br>
     Configure <strong>Field Calculator</strong> inputs as follows:<br>
     Create a new field: (checked)<br>
@@ -215,7 +215,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
      This field calculation will take a couple of seconds. We're evaluating 57,657 rows.<br><br>
     <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-4.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-4.png" alt="QGIS: Add and calculate new field" title="" /></li>
   <li>Confirm field calculation of 'strength':<br><br>
-  Be sure to <strong>Save Edits</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/save-edits.png"/> then <strong>Disable Editing</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/toggle-edit.png"/> before continuing. Your geology layer will no longer be red (Edit Mode).<br><br><img data-ffeatherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-5.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-5.png" alt="Spatial Data Bootcamp: QGIS - check calculation"/>
+  Be sure to <strong>Save Edits</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/save-edits.png"/> then <strong>Disable Editing</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/toggle-edit.png"/> before continuing. Your geology layer will no longer be red (Edit Mode).<br><br><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-5.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-5.png" alt="Spatial Data Bootcamp: QGIS - check calculation"/>
   </li>
 </ol>
 <h4>4. Visualize the geology by strength</h4>
@@ -239,39 +239,70 @@ Input file: <strong>wa_geology</strong><br>
 Attribute filed: <strong>strength</strong><br>
 Output file for rasterized vectors (raster): <strong>wa_geo_coded</strong><br>
 <span style="padding-left:20px;"><em>"The output file doesn't exist. You must set up the output size or resolution to create it:"</em> <strong>OK</strong></span><br>
-Raster size in pixels: <strong>1000</strong><br>
-Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> icon <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-edit.png"/> near the block of code. This allows to add custom parameters.<br><br><img date-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-1.png" alt="Spatial Data Bootcamp: Gdal edit"/>
+Raster size in pixels: <strong>3280 x 3280</strong> (1km resolution)<br>
+Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> icon <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-edit.png"/> near the block of code. This allows to add custom parameters.<br><br>
+Add the line of code: <code>-at -a_nodata 0</code><br><br>
+<img date-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-1.png" alt="Spatial Data Bootcamp: Gdal edit"/><br><br><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-2.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/gdal-rasterize-2.png" alt="Spatial Data Bootcamp"/><br><br>
+The <code>-at</code> flag enables the ALL_TOUCHED rasterization option so that all pixels touched by lines or polygons will be updated, not just those on the line render path, or whose center point is within the polygon. Defaults to disabled for normal rendering rules.[^3]<br><br>
+<code>-a_nodata 0 </code> The above snippet specifies that 0 should be recognized as a missing or null value, which prevents pixels with 0 value from being visualized or used in analysis in the output raster.[^3]<br><br>
+Drum roll...<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-8.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-8.png" alt="Spatial Data Bootcamp"/>
+Notice the light blue (water) above. We declared 0 as <code>no_data</code> so water is no longer included in our raster dataset.
 </li>
-  <li>Click the edit icon (pencil) locate near the block of code</em>. This enables you to add custom parameters.</li>
-  <li>Add the line of code 
-    <code>-at -a_nodata 0</code> just after <code>gdal_rasterize</code><br>
-    The <code>-at</code> flag enables the ALL_TOUCHED rasterization option so that all pixels touched by lines or polygons will be updated, not just those on the line render path, or whose center point is within the polygon. Defaults to disabled for normal rendering rules.[^3]</li>
-  <li><code>-a_nodata 0 </code> The above snippet specifies that 0 should be recognized as a missing or null value, which prevents pixels with 0 value from being visualized or used in analysis in the output raster.[^3]</li>
-  <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-11-2.png" class="screen-shot" /></li>
 </ol>
 <h4>6. Style the new Rock Strength Raster</h4>
+It's good to visually check your results, if any large issues may occur. Sometimes you must look at your data values to locate errors. Let's style our new geology raster.
 <ol>
-  <li>Open WA_geology.tif style properties. HINT: See step 4.</li>
-  <li>For <b>Render type</b>, select <b>Singleband pseudocolor</b></li>
-  <li>On the right select: 
+  <li>Open wa_geo_coded style properties.</li>
+  <li>Render type: <b>Singleband pseudocolor</b></li>
+  <li>Load actual values: 
   <ul>
-    <ul>
-      <li>Load min/max values: Min/max; </li>
-      <li>Extend: Actual (slower); then Load</em>.</li>
+      <li><b>Load min/max values: Min/max</b> </li>
+      <li><b>Extent: Actual (slower)</b></li>
+      <li><b>Click LOAD</b> to load actual values</li>
     </ul>
   This loads actual values into the classification. QGIS Approximates the Minimum and Maximum values by default. </li>
-  <li><em>Change Mode to Equal Interval with 3 classes</em>. Remember, we only have three rock strength classes: soft, medium, hard. Change your color map if you'd like. The color maps are not stored into the raster, so the raster will load with the default color map (black to white) each time its opened in a new project.</li>
-  <li>Click <em>Classify</em>. Apply and OK.<br>
-    <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/lesson-1/lesson-1-13.png" alt="QGIS: Style raster" title="" /></li>
+  <li><b>Change Mode to Equal Interval with 3 classes</b>.<br><br>Remember, we only have three rock strength classes: soft, medium, hard. The color maps are not stored into the raster, so the raster will load with the default color map (black to white) each time its opened in a new project.<br><br></li>
+  <li>Click <b>Classify</b> to add categories.<br><br>
+  <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-9.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-9.png" alt="Spatial Data Bootcamp"/></li>
+  <li>Click <b>APPLY</b> to confirm changed and <b>OK</b> to exit properties.<br>
+    <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-10.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-10.png" alt="QGIS: Style raster" title="" /></li>
 </ol>
 
-<hr />
+<h4>7. Prepare slope for analysis:</h4>
+<p>Now it's time to perform an analysis. We're going to reclassify our slope into something useful.</p>
 
-<h3>7. Data Analysis</h3>
+<ol>
+<li>Import wa_slope.tif<br><br>
+<p>This slope raster was created in the <b>Spatial Functions</b>. If you still have it, great. Otherwise the slope raster is available here:<br><br>
+iRods access: &nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise/wa_slope.tif</code></p>
 
-<p>Reclassifying inputs:</p>
+<p>Or download file: <a href="http://de.iplantcollaborative.org/dl/d/28E8ADDB-CE25-4A8D-917D-7799803544FA/wa_slope.tif">wa_slope.tif</a></p>
+<p><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-11.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-11.png" alt="Spatial Data Bootcamp"/></p>
+</li>
+<li>
+<p>In order to reclass our slope layer into something useful, we will use the grass <em>r.reclass</em> tool</p>
 
-<h4>Slope</h4>
+<p>The r.reclass tool reads text files which define the classification rules (rule files). We must prepare a text file with the following contents using a <strong>text editor</strong> not Microsoft Word</p>
+
+<b><em>Create slope-rule.txt:</em></b>
+
+<p><code>
+0 thru 2.99 = 1<br>
+3 thru 4.99 = 2<br>
+5 thru 9.99 = 3<br>
+10 thru 14.99 = 4<br>
+15 thru 19.99 = 5<br>
+20 thru 29.99 = 6<br>
+30 thru 39.99 = 7<br>
+40 thru 90 = 8
+</code></p>
+
+<br>
+
+<p>Reclassifying inputs definition - how to interpret slope-rule.txt:</p>
+
+<b>Slope</b>
 
 <table class="rules-table" style="width=30%">
   <col width="90" style="text-align:center;">
@@ -312,38 +343,46 @@ Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> ico
     <td>&gt; 40&deg;</td>
   </tr>
 </table>
+</li>
+<li>
+<p>Once we have created the slope-rule.txt file, we can select the <strong>r.reclass tool</strong> from the Processing Toolbox.</p>
 
+<p>Open the Processing Toolbox: <em>Menu Bar > Processing > Toolbar</em></p> 
 
+<p>And enable <strong>Advanced Interface</strong> by clicking the dropdowin list at the bottom of the Processing Toolbox:<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-12.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-12.png" alt="Spatial Data Bootcamp"/>
+</p>
 
-<p>In order to reclass our slope layer into something useful, we will use the grass <em>r.reclass</em> tool</p>
-
-<p>The r.reclass tool reads text files which define the classification rules(rule files). For this example, our rule fill will have the following contents:</p>
-
-<h5><em>slope-rule.txt</em></h5>
-
-<p><code>
-0 thru 2.99 = 1<br>
-3 thru 4.99 = 2<br>
-5 thru 9.99 = 3<br>
-10 thru 14.99 = 4<br>
-15 thru 19.99 = 5<br>
-20 thru 29.99 = 6<br>
-30 thru 39.99 = 7<br>
-40 thru 90 = 8
-</code></p>
-
-<p>Once we have created the slope rule file. We can select the r.reclass tool from the Processing Toolbox.</p>
-
-<p>In the processing toolbox, select <em>GRASS commands</em> > <em>Raster</em> > <em>r.reclass</em></p>
-
+<p>From the Advanced Processing Toolbox, select <em>GRASS commands</em> > <em>Raster</em> > <em>r.reclass</em><br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-13.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-13.png" alt="Spatial Data Bootcamp"/>
+</p>
+<br><br>
+<p><pre><code><strong>If you receive this error, download the reclassified slope here: <a href="link-here">wa_reclass_slope.tif</a><br><br>
+Or to enable GRASS Provider: <em>Menu Bar > Processing > Options > Providers > (enable GRASS)</em><br><br>
+Otherwise continue on.</strong><br><br>
+This means you don't have GRASS installed or bad configuration.
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/grass-error.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/grass-error.png" alt="Spatial Data Bootcamp"/>
+</code></pre>
+</p>
+<p>Continuing on...</p>
 <p>We will use the following settings for the reclassify tool:<br></p>
 
 <ul>
-<li>Input Raster: <em>WA_slope</em></li>
-<li>File containing reclass rules: <em>slope-rules.txt</em></li>
-<li>Output raster layer: <em>slope-reclass.tif</em> (NOTE: select <em>Save to file...</em> or else QGIS will not create a permanent output)<br>
-<img src="{{BASE_PATH}}{{ASSET_PATH}}/images/slope-reclass.png" alt="slope-reclass" title="" /></li>
+<li>Input Raster: <b>WA_slope</b></li>
+<li>File containing reclass rules: <b>slope-rules.txt</b></li>
+<li>Output raster layer: <b>slope-reclass.tif</b> (NOTE: select <em>Save to file...</em> or QGIS will not create a permanent output)<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-14.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-14.png" alt="slope-reclass" title="" /><br><br>Your output should look similar to the input. However, your legend should read different categories.<br><br>The output layer it titled "Output raster layer" but is still saved to the hard drive. Rename this output raster to <strong>wa_slope_reclass</strong>.<br><br>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-15.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-15.png" alt="Spatial Data Bootcamp"/></li>
 </ul>
+
+
+</li>
+
+</li>
+</ol>
+
+
+
 
 <h4>Susceptibility</h4>
 
@@ -351,11 +390,14 @@ Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> ico
 
 <p><img src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-key.png" alt="landslide-key" title="" /></p>
 
-<p>Since we need to cross reference these categories, we need to create a raster which represents each unique combination of the slope and rock strength classes. A method to create unique combinations is to promote the rock strength categories a decimal place. This would make the rock classes: 10,20, and 30.</p>
+<p>Since we need to cross reference these categories, we need to create a raster which represents each unique combination of the slope and rock strength classes. A method to create unique combinations is to promote the rock strength categories a decimal place. This would make the rock classes: 10,20, and 30. This is done in <strong>Raster Calculator</strong>.</p>
 
-<p>To create these new classes, we can load the <em>WA_geology.tif</em>, and slope-reclass.tif</p>
+<p>We will be using both <b>wa_geo_coded.tif</b>, and <b>wa_slope_reclass.tif</b></p>
 
-<p>In the top menu, select <em>Raster</em> > <em>Raster Calculator</em></p>
+<ol>
+
+<li>
+Open the <b>Raster Calculator</b>: <em>Menu Bar > Raster > Raster Calculator</em><br><br>
 
 <p>Our raster calculator expression will be: </p>
 
@@ -363,13 +405,23 @@ Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> ico
 ("geo_coded@1" * 10) + "slope-reclass@1"
 </code></p>
 
-<p>Output layer: slope-geo-sect.tif</p>
+<p>Output layer: <b>slope_geo_sect.tif</b></p>
 
-<p><img src="{{BASE_PATH}}{{ASSET_PATH}}/images/raster-calc.png" alt="raster-calc" title="" /></p>
+<p><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-16.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-16.png" alt="raster-calc" title="" /></p>
 
-<p>We can apply the landslide susceptibility classification using r.reclass and the following rule file:</p>
+<br>
 
-<p><em>landslide-rule.txt</em></p>
+<p>View the new <b>slope_geo_sect.tif</b></p>
+
+<p><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-17.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-17.png" alt="Spatial Data Bootcamp"/></p>
+</li>
+
+<li>
+<p>We can apply the landslide susceptibility classification to <b>slope_geo_sect.tif</b> using <b>r.reclass</b> and the following rule file:</p>
+
+<p><b>Create landslide-rule.txt:</b></p>
+
+<p>Copy and pase the code into a new file and save it as <b>landslide-rule.txt</b></p>
 
 <p><code>
 11 12 13 21 31 = 0<br>
@@ -379,17 +431,43 @@ Enable editing the gdal_rasterize code by clicking the <strong>Edit</strong> ico
 16 32 33 = 7<br>
 17 18 24 = 8<br>
 25 thru 28 34 = 9<br>
-35 thru 38 = 10<br>
+35 thru 38 = 10
 </code></p>
 
-<h3>Continue to SHOW YOUR RESULTS</h3>
+<br>
 
+<p>
+Open <b>r.reclass</b>: <em>Processing Toolbox > GRASS > Raster > r.reclass</em>
+</p>
 
-[^1]: http://www.usgs.gov/blogs/features/usgs_top_story/landslide-in-washington-state
-[^2]: http://www.conservation.ca.gov/cgs/information/publications/Documents/MS58.pdf
-[^3]: http://www.spatialreference.org/ref/epsg/2927
-[^4]: https://lta.cr.usgs.goc/GTOPO30
-[^5]: http://www.dnr.wa.gov/ResearchScience/Topics/GeosciencesData/Pages/gis_data.aspx
-[^6]: http://wdfw.wa.gov/conservation/gap/land_cover_data.html
-[^7]: http://www.esrl.noaa.gov/thredds/catalog/Datasets/cpc_us_precip/catalog.xml#Datasets/cpc_us_precip/RT
-[^8]: http://gadm.org/country
+<p>Configure as follows:<br>
+Input raster layer: <b>slope_geo_sect</b><br>
+File containing reclass rules: <b>landslide-rule.txt</b><br>
+Output raster layer: <b>wa_landslide_suscept.tif</b>
+</p>
+
+<p>Notice the projection of <b>slope_geo_sect</b> is <a href="http://spatialreference.org/ref/epsg/2286/" target="_blank">EPSG:2286</a>. This is <em>close</em> to <a href="http://spatialreference.org/ref/epsg/2927/" target="_blank">EPSG:2927</a>. <a href="http://www2.arnes.si/~gljsentvid10/datm_faq.html#1.2" target="_blank">Read here about the difference</a>. This is not a published analysis so we will move on.
+
+<p>
+<img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-18.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-18.png" alt="Spatial Data Bootcamp"/>
+</p>
+
+</li>
+<li>
+<p>Our final product of landslide susceptibility within the entire state of Washington.</p>
+</li>
+</ol>
+
+<hr>
+<br>
+References:
+<ol>
+<li> http://www.usgs.gov/blogs/features/usgs_top_story/landslide-in-washington-state</li>
+<li> http://www.conservation.ca.gov/cgs/information/publications/Documents/MS58.pdf</li>
+<li> http://www.spatialreference.org/ref/epsg/2927</li>
+<li> https://lta.cr.usgs.goc/GTOPO30</li>
+<li> http://www.dnr.wa.gov/ResearchScience/Topics/GeosciencesData/Pages/gis_data.aspx</li>
+<li> http://wdfw.wa.gov/conservation/gap/land_cover_data.html</li>
+<li> http://www.esrl.noaa.gov/thredds/catalog/Datasets/cpc_us_precip/catalog.xml#Datasets/cpc_us_precip/RT</li>
+<li> http://gadm.org/country</li>
+</ol>
