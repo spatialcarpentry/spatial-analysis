@@ -18,7 +18,10 @@ tags : [spatial functions]
 - Recognize a few spatial relationships
 - Understand how to clip a raster  
 
-#### Data:
+#### Exercise: [Spatial functions with rasters](#raster-exercise)
+
+<!--
+    #### Data:
 
 iRods access: <br>&nbsp;&nbsp;&nbsp;``/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions``
 
@@ -28,6 +31,7 @@ Download files:
 
 - [Washington state boundary (washington.shp)](http://de.iplantcollaborative.org/dl/d/761205F0-7921-4E0A-8209-94FC79357569/washington.zip)
 - [US northwest GTOPO30 DEM (dem_2927.tif)](http://de.iplantcollaborative.org/dl/d/8859A56F-A310-447F-A200-A4EB4AED2DF8/dem_2927.tif)
+-->
 
 ----
 
@@ -230,7 +234,8 @@ Symmetric Difference
   * Raster Calculator - Performs a designated mathematical equation on all values within a raster. This can also be used to combine/difference rasters.
   * Interpolation - Useful for resurfacing a dataset. This can also be used to create a continuous surface from a point dataset.
   * Reclassify - Useful for creating discrete value categories from continous values(e.g.float data) also useful for creating presence absence datasets.
-  * Polygonize - Creates a set of polygon features representing the given raster dataset
+  * Polygonize - Creates a set of polygon features representing the given raster dataset<a name="raster-exercise"></a>
+
   * Histogram - Create a histogram showing the distribution of values in a raster dataset
 
 <br>
@@ -239,12 +244,15 @@ Symmetric Difference
 
 ## Exercise
 
+<p>We are going to utilize spatial functions to prepare data for the <b>Landslide Exercise</b>.</p>
+
 <ol>
 <li>Import Washington boundary and dem_2927:<br>
 <ol>
-<li>iRods access: <br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions</code>
+<li>iRods access: <br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions/washington.shp</code><br><br>
+And: <br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/spatial-functions/dem_2927.tif</code>
 <br><br>
-Or download here:<br>&nbsp;&nbsp;&nbsp;<a href="link-here">washington.zip</a><br>&nbsp;&nbsp;&nbsp;<a href="link-here">dem_2927.tif</a><br><br>You should now be viewing the boundary of Washington and a DEM of the US northwest:<br><br>
+Or download here, unzip (washington.zip), and import:<br>&nbsp;&nbsp;&nbsp;<a href="http://de.iplantcollaborative.org/dl/d/761205F0-7921-4E0A-8209-94FC79357569/washington.zip">washington.zip</a><br>&nbsp;&nbsp;&nbsp;<a href="http://de.iplantcollaborative.org/dl/d/070D4F97-D041-4F5D-A120-7BA6C0F6113F/dem_2927.tif">dem_2927.tif</a><br><br>You should now be viewing the boundary of Washington and a DEM of the US northwest:<br><br>
 <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-1.png" alt="Spatial Data Bootcamp: Washington and DEM" src="{{BASE_PATH}}{{ASSET_PATH}}/images/analysis-1.png"/><br><br>
 </li>
 </ol>
@@ -313,12 +321,13 @@ Configure inputs as follows:<br>
 </ol>
 
 <p>You have just successfully clipped a raster to a vector, created a slope raster, and created a hillshade raster.</p>
-
+<p>The clipped DEM and slope with be used in the <b>Landslide Susceptibility Model</b>.</p>
+<p>The hillshade will be used in <b>Compose a Map</b>.</p>
 <hr>
 
-[^1]: SQL Simple Features Specification
-[^2]: JTS
-
-
-* [^3] : Esri
-* [^4] : PostGIS Reference Manual.  <a href="//postgis.org/documentation/manual-svn/using_postgis_dbmanagement.html">http://postgis.org/documentation/manual-svn/using_postigs_dbmanagement.html</a>
+<ol>
+<li> SQL Simple Features Specification</li>
+<li> JTS</li>
+<li> Esri</li>
+<li> PostGIS Reference Manual.  <a href="//postgis.org/documentation/manual-svn/using_postgis_dbmanagement.html">http://postgis.org/documentation/manual-svn/using_postigs_dbmanagement.html</a></li>
+</ol>
