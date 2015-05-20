@@ -169,9 +169,11 @@ This case study has been chosen to demonstrate the concepts being highlighted by
    
 <h4>1. Load the Geology Layer</h4>
   <ol>
-    <li>Open QGIS and first set the project projection to ESPG:2927. This will ensure we have the correct projection after importing layers.</li>
+    <li>Open QGIS and first set the project projection to ESPG:2927. This will ensure we have the correct projection after importing layers. It's recommended to download and unzip the wa_geology layer due to its larger file size.<br><br></li>
+    <ol>
     <li>Load wa_geology.shp through the iRods plugin:<br>&nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp/spatial-analysis/landslide-exercise/wa_geology.shp</code></li>
-    <li>Or download, unpack, and <strong>Add Vector Layer</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/add-vector.png"/>:<br><a href="http://de.iplantcollaborative.org/dl/d/3B859CEE-D017-4F8F-A803-2D1C87F8D45C/wa_geology.zip">wa_geology.zip</a><br><br></li>
+    <li>Or download, unzip, and <strong>Add Vector Layer</strong> <img src="{{BASE_PATH}}{{ASSET_PATH}}/images/add-vector.png"/>:<br><a href="http://de.iplantcollaborative.org/dl/d/433E2335-1732-4BD3-9AA4-CDF08B7D7020/wa_geology.zip">wa_geology.zip</a><br><br></li>
+    </ol>
     <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
     </li>
   </ol>
@@ -357,7 +359,7 @@ iRods access: &nbsp;&nbsp;&nbsp;<code>/iplant/home/shared/aegis/Spatial-bootcamp
 <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-13.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-13.png" alt="Spatial Data Bootcamp"/>
 </p>
 <br><br>
-<p><pre><code><strong>If you receive this error, download the reclassified slope here: <a href="link-here">wa_reclass_slope.tif</a><br><br>
+<p><pre><code><strong>If you receive this error, download the reclassified slope here: <a href="http://de.iplantcollaborative.org/dl/d/40368F38-0383-412A-B49A-DC4C1E86BC77/wa_slope_reclass.tif">wa_reclass_slope.tif</a><br><br>
 Or to enable GRASS Provider: <em>Menu Bar > Processing > Options > Providers > (enable GRASS)</em><br><br>
 Otherwise continue on.</strong><br><br>
 This means you don't have GRASS installed or bad configuration.
