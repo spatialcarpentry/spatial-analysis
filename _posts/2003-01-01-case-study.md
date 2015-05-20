@@ -177,7 +177,7 @@ This case study has been chosen to demonstrate the concepts being highlighted by
     <img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-1.png" alt="QGIS: Add geology vector layer into map view" class="screen-shot" />
     </li>
   </ol>
-<h4>2. Inspect Washington Geology Atrributes</h4>
+<h4>2. Inspect Washington Geology Attributes</h4>
 <p>If you open the Washington geology attributes you'll notice there's a column 'rock_type' with values as <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a>. Our landslide susceptibility model requires that we have a numeric value representing 'rock_type'. Notice the range of 'rock_type': soft, medium, hard. Wow that's an easy one! It's easy as 1, 2, 3 (literally). You're welcome for the heavy lifting. See 'geo_unit' for actual geologic unit types.</p>
 <p>We are going to add a new field to the wa_geology shapefile to represent the strength of the geologic unit. This new field data type will be <em>number</em>, not a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a>. This will allow us to perform arithmetic opertions later on.<br><br><strong>Think about it</strong>: the value '1' represented as a <a href="http://en.wikipedia.org/wiki/String_%28computer_science%29" target="_blank">string</a> does not equal the numeric value of 1. In this case, an <a href="http://en.wikipedia.org/wiki/Integer_%28computer_science%29">integer</a>.<br><br></p>
 <p><img data-featherlight="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-3.png" src="{{BASE_PATH}}{{ASSET_PATH}}/images/landslide-3.png" alt="Spatial Data Bootcamp: QGIS check geology"/></p>
